@@ -1,0 +1,170 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 23.10.2021 21:12:30
+-- Design Name: 
+-- Module Name: tb_uart_to_sram - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use std.env.finish;
+
+entity tb_uart_to_sram is
+end entity tb_uart_to_sram;
+
+architecture Behavioral of tb_uart_to_sram is
+    component concatenator_16 is
+        port(
+            i_rst  : in  std_logic;
+            i_load : in  std_logic;
+            i_data : in  std_logic_vector(7 downto 0);
+            o_dv   : out std_logic;
+            o_data : out std_logic_vector(15 downto 0)
+        );
+    end component;
+
+    component sram_fsm is
+        port(
+            i_clk      : in  std_logic;
+            i_rst      : in  std_logic;
+            i_data     : in  std_logic_vector(15 downto 0);
+            i_write    : in  std_logic;
+            o_ram_addr : out std_logic_vector(26 downto 0);
+            o_ram_data : out std_logic_vector(15 downto 0);
+            o_ram_lb   : out std_logic;
+            o_ram_ub   : out std_logic;
+            o_ram_cen  : out std_logic;
+            o_ram_wen  : out std_logic
+        );
+    end component;
+
+    signal tb_clk      : std_logic                    := '0';
+    signal tb_rst      : std_logic                    := '0';
+    signal tb_rx_data  : std_logic_vector(7 downto 0) := (others => '0');
+    signal tb_rx_dv    : std_logic                    := '0';
+    signal tb_ram_addr : std_logic_vector(26 downto 0);
+    signal tb_ram_data : std_logic_vector(15 downto 0);
+    signal tb_ram_lb   : std_logic;
+    signal tb_ram_ub   : std_logic;
+    signal tb_ram_cen  : std_logic;
+    signal tb_ram_wen  : std_logic;
+    signal tb_write    : std_logic;
+    signal tb_data     : std_logic_vector(15 downto 0);
+
+    constant byte_1 : std_logic_vector(7 downto 0) := "01101101";
+    constant byte_2 : std_logic_vector(7 downto 0) := "10101111";
+    constant byte_3 : std_logic_vector(7 downto 0) := "10111100";
+    constant byte_4 : std_logic_vector(7 downto 0) := "11011011";
+
+    procedure wait_clk(constant cycle : in integer) is
+    begin
+        for i in 0 to cycle - 1 loop
+            wait until falling_edge(tb_clk);
+        end loop;
+    end procedure;
+begin
+    -- Clock generation @ 100 MHz
+    tb_clk <= not tb_clk after 5 ns;
+
+    concat : concatenator_16
+        port map(
+            i_rst  => tb_rst,
+            i_load => tb_rx_dv,
+            i_data => tb_rx_data,
+            o_dv   => tb_write,
+            o_data => tb_data
+        );
+
+    DUT : sram_fsm
+        port map(
+            i_clk      => tb_clk,
+            i_rst      => tb_rst,
+            i_data     => tb_data,
+            i_write    => tb_write,
+            o_ram_addr => tb_ram_addr,
+            o_ram_data => tb_ram_data,
+            o_ram_lb   => tb_ram_lb,
+            o_ram_ub   => tb_ram_ub,
+            o_ram_cen  => tb_ram_cen,
+            o_ram_wen  => tb_ram_wen
+        );
+
+    test_vga_controller_wrapper : process
+    begin
+        -- Reset system
+        tb_rst <= '1';
+        wait_clk(10);
+        tb_rst <= '0';
+        wait_clk(10);
+
+        -- Send first byte
+        for i in 7 downto 0 loop
+            tb_rx_data(i) <= byte_1(i);
+            if i /= 0 then
+                wait for 1.085 us;
+            end if;
+        end loop;
+        wait_clk(1);
+        tb_rx_dv <= '1';
+        wait_clk(1);
+        tb_rx_dv <= '0';
+        wait for 10.851 us;
+
+        -- Send second byte
+        for i in 7 downto 0 loop
+            tb_rx_data(i) <= byte_2(i);
+            if i /= 0 then
+                wait for 1.085 us;
+            end if;
+        end loop;
+        wait_clk(1);
+        tb_rx_dv <= '1';
+        wait_clk(1);
+        tb_rx_dv <= '0';
+        wait for 10.851 us;
+
+        -- Send third byte
+        for i in 7 downto 0 loop
+            tb_rx_data(i) <= byte_3(i);
+            if i /= 0 then
+                wait for 1.085 us;
+            end if;
+        end loop;
+        wait_clk(1);
+        tb_rx_dv <= '1';
+        wait_clk(1);
+        tb_rx_dv <= '0';
+        wait for 10.851 us;
+
+        -- Send fourth byte
+        for i in 7 downto 0 loop
+            tb_rx_data(i) <= byte_4(i);
+            if i /= 0 then
+                wait for 1.085 us;
+            end if;
+        end loop;
+        wait_clk(1);
+        tb_rx_dv <= '1';
+        wait_clk(1);
+        tb_rx_dv <= '0';
+
+        wait_clk(10100);
+        -- Stop simulation
+        report "Simulation completed";
+        finish;
+    end process;
+end architecture Behavioral;

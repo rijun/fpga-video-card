@@ -33,46 +33,31 @@ entity concatenator_16 is
 end concatenator_16;
 
 architecture Behavioral of concatenator_16 is
-    type state_type is (t_EMPTY, t_HALF_FULL, t_FULL);
-    signal state      : state_type                    := t_EMPTY;
-    signal next_state : state_type                    := t_EMPTY;
-    signal r_data     : std_logic_vector(15 downto 0) := (others => '0');
+    signal r_ld_counter : unsigned(1 downto 0);
+    signal r_data       : std_logic_vector(15 downto 0) := (others => '0');
 begin
-    state_storage : process(i_rst, i_load)
+    o_dv   <= '1' when r_ld_counter = 2 else '0';
+    o_data <= r_data;
+
+    process(i_rst, i_load)
     begin
         if rising_edge(i_load) then
-            state      <= next_state;
+            case r_ld_counter is
+                when "00" =>
+                    r_data(15 downto 8) <= i_data;
+                    r_ld_counter <= r_ld_counter + 1;
+                when "01" =>
+                    r_data(7 downto 0) <= i_data;
+                    r_ld_counter <= r_ld_counter + 1;
+                when "10" =>
+                    r_data(15 downto 8) <= i_data;
+                    r_ld_counter <= r_ld_counter - 1;
+                when others =>
+                    r_ld_counter <= (others => '0');
+            end case;
         end if;
         if (i_rst = '1') then
-            state  <= t_EMPTY;
+            r_ld_counter <= (others => '0');
         end if;
-    end process state_storage;
-
-    state_transition_logic : process(state, i_data)
-    begin
-        case state is
-            when t_EMPTY =>
-                next_state          <= t_HALF_FULL;
-                r_data(15 downto 8) <= i_data;
-            when t_HALF_FULL =>
-                next_state         <= t_FULL;
-                r_data(7 downto 0) <= i_data;
-            when t_FULL =>
-                next_state          <= t_HALF_FULL;
-                r_data(15 downto 8) <= i_data;
-        end case;
-    end process state_transition_logic;
-
-    output_logic : process(state, r_data)
-    begin
-        case state is
-            when t_FULL =>
-                o_dv   <= '1';
-                o_data <= r_data;
-            when others =>
-                o_dv   <= '0';
-                o_data <= (others => '0');
-        end case;
-    end process output_logic;
-
+    end process;
 end Behavioral;
