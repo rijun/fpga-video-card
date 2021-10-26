@@ -56,7 +56,7 @@
 #Do NOT ignore *.xpr files
 !*.xpr
 #Include *.xml files for 2013.4 or earlier version
-!*.xml
+#!*.xml
 #########
 #Constraint files
 #########
@@ -88,3 +88,7 @@
 #Custom files
 #########
 video-card/video-card.ip_user_files/README.txt
+#########
+#Custom folders
+#########
+video-card.sim

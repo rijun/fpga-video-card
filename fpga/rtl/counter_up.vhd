@@ -4,7 +4,7 @@
 -- 
 -- Create Date: 25.10.2021 10:12:52
 -- Design Name: 
--- Module Name: counter_up - Behavioral
+-- Module Name: counter_up - RTL
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 

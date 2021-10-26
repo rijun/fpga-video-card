@@ -4,7 +4,7 @@
 -- 
 -- Create Date: 23.10.2021 22:27:43
 -- Design Name: 
--- Module Name: sram_fsm - Behavioral
+-- Module Name: sram_fsm - RTL
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -37,7 +37,7 @@ entity sram_fsm is
     );
 end sram_fsm;
 
-architecture Behavioral of sram_fsm is
+architecture RTL of sram_fsm is
     component counter_up is
         generic(
             c_WIDTH : integer := 4;
@@ -148,4 +148,4 @@ begin
             o_out => timeout
         );
 
-end Behavioral;
+end RTL;

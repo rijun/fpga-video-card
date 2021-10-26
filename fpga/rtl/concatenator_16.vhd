@@ -4,7 +4,7 @@
 -- 
 -- Create Date: 23.10.2021 22:27:43
 -- Design Name: 
--- Module Name: concatenator_16 - Behavioral
+-- Module Name: concatenator_16 - RTL
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -32,7 +32,7 @@ entity concatenator_16 is
     );
 end concatenator_16;
 
-architecture Behavioral of concatenator_16 is
+architecture RTL of concatenator_16 is
     signal r_ld_counter : unsigned(1 downto 0);
     signal r_data       : std_logic_vector(15 downto 0) := (others => '0');
 begin
@@ -60,4 +60,4 @@ begin
             r_ld_counter <= (others => '0');
         end if;
     end process;
-end Behavioral;
+end RTL;

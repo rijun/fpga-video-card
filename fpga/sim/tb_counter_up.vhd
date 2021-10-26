@@ -76,6 +76,7 @@ begin
         wait_clk(10);
         tb_en <= '1';
         wait_clk(1100);
+        assert tb_out = '1' report "Counter did not trigger" severity error;        
         -- Stop simulation
         report "Simulation completed";
         finish;

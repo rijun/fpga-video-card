@@ -4,7 +4,7 @@
 -- 
 -- Create Date: 28.09.2021 14:37:36
 -- Design Name: 
--- Module Name: counter - Behavioral
+-- Module Name: vga_counter - RTL
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -22,14 +22,14 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity counter is
+entity vga_counter is
     port(i_clk       : in  std_logic;
          i_resetn    : in  std_logic;
          o_h_count : out std_logic_vector(9 downto 0);
          o_v_count : out std_logic_vector(9 downto 0));
-end counter;
+end vga_counter;
 
-architecture Behavioral of counter is
+architecture RTL of vga_counter is
     signal clk       : std_logic;
     signal rst       : std_logic;
     signal h_counter : unsigned(9 downto 0);
@@ -58,4 +58,4 @@ begin
             end if;
         end if;
     end process;
-end Behavioral;
+end RTL;

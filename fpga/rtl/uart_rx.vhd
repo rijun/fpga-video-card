@@ -4,7 +4,7 @@
 -- 
 -- Create Date: 19.10.2021 23:57:05
 -- Design Name: 
--- Module Name: uart_rx - Behavioral
+-- Module Name: uart_rx - RTL
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -36,7 +36,7 @@ entity uart_rx is
     );
 end uart_rx;
 
-architecture Behavioral of uart_rx is
+architecture RTL of uart_rx is
     type t_SM_Main is (s_Idle, s_RX_Start_Bit, s_RX_Data_Bits,
                        s_RX_Stop_Bit, s_Cleanup);
     signal r_SM_Main : t_SM_Main := s_Idle;
@@ -128,4 +128,4 @@ begin
             end case;
         end if;
     end process p_UART_RX;
-end Behavioral;
+end RTL;

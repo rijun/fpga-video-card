@@ -4,7 +4,7 @@
 -- 
 -- Create Date: 28.09.2021 23:30:43
 -- Design Name: 
--- Module Name: tb_vga_controller_wrapper - Behavioral
+-- Module Name: tb_video_card - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -32,11 +32,11 @@ use std.env.finish;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity tb_vga_controller_wrapper is
+entity tb_video_card is
 --  Port ( );
-end tb_vga_controller_wrapper;
+end tb_video_card;
 
-architecture Behavioral of tb_vga_controller_wrapper is
+architecture Behavioral of tb_video_card is
     component vga_controller_wrapper is
         port (
             sys_clock : in std_logic;

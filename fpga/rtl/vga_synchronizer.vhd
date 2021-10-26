@@ -4,7 +4,7 @@
 -- 
 -- Create Date: 28.09.2021 14:37:36
 -- Design Name: 
--- Module Name: synchronizer - Behavioral
+-- Module Name: vga_synchronizer - RTL
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -22,7 +22,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity synchronizer is
+entity vga_synchronizer is
     port(i_clk     : in  std_logic;
          i_rst     : in  std_logic;
          i_h_count : in  std_logic_vector(9 downto 0);
@@ -32,9 +32,9 @@ entity synchronizer is
          o_beam    : out std_logic;
          o_pixel_x : out std_logic_vector(9 downto 0);
          o_pixel_y : out std_logic_vector(8 downto 0));
-end synchronizer;
+end vga_synchronizer;
 
-architecture Behavioral of synchronizer is
+architecture RTL of vga_synchronizer is
     signal clk     : std_logic;
     signal rst     : std_logic;
     signal h_count : unsigned;
@@ -83,4 +83,4 @@ begin
             end if;
         end if;
     end process;
-end Behavioral;
+end RTL;

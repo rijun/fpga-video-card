@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 28.09.2021 14:37:36
+-- Create Date: 20.10.2021 00:15:44
 -- Design Name: 
--- Module Name: pattern_generator - Behavioral
+-- Module Name: video_card - RTL
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,13 +31,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity pattern_generator is
+entity video_card is
 --  Port ( );
-end pattern_generator;
+end video_card;
 
-architecture Behavioral of pattern_generator is
+architecture RTL of video_card is
 
 begin
 
 
-end Behavioral;
+end RTL;
