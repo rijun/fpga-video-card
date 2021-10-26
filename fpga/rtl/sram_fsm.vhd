@@ -61,11 +61,12 @@ architecture RTL of sram_fsm is
     signal writing    : std_logic;
     signal write_done : std_logic;
 begin
-    o_ram_addr <= std_logic_vector(addr);
+    
     
     state_machine : process(i_clk, i_rst)
     begin
         if rising_edge(i_clk) then
+            o_ram_addr <= (others => 'Z');
             o_ram_data <= (others => 'Z');
             o_ram_lb   <= 'Z';
             o_ram_ub   <= 'Z';
@@ -94,6 +95,7 @@ begin
                         state <= t_IDLE;
                     end if;
                 when t_WRITE =>
+                    o_ram_addr <= std_logic_vector(addr);
                     o_ram_data <= data;
                     o_ram_lb   <= '0';
                     o_ram_ub   <= '0';
