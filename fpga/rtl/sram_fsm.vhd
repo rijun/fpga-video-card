@@ -66,11 +66,11 @@ begin
     state_machine : process(i_clk, i_rst)
     begin
         if rising_edge(i_clk) then
-            o_ram_data <= (others => '0');
-            o_ram_lb   <= '1';
-            o_ram_ub   <= '1';
-            o_ram_cen  <= '1';
-            o_ram_wen  <= '1';
+            o_ram_data <= (others => 'Z');
+            o_ram_lb   <= 'Z';
+            o_ram_ub   <= 'Z';
+            o_ram_cen  <= 'Z';
+            o_ram_wen  <= 'Z';
 
             case state is
                 when t_IDLE =>

@@ -27,6 +27,18 @@ entity tb_uart_to_sram is
 end entity tb_uart_to_sram;
 
 architecture Behavioral of tb_uart_to_sram is
+    component uart_rx is
+        generic(
+            g_CLKS_PER_BIT : integer := 115 -- Needs to be set correctly
+        );
+        port(
+            i_Clk       : in  std_logic;
+            i_RX_Serial : in  std_logic;
+            o_RX_DV     : out std_logic;
+            o_RX_Byte   : out std_logic_vector(7 downto 0)
+        );
+    end component uart_rx;
+
     component concatenator_16 is
         port(
             i_rst  : in  std_logic;
@@ -52,18 +64,19 @@ architecture Behavioral of tb_uart_to_sram is
         );
     end component;
 
-    signal tb_clk      : std_logic                    := '0';
-    signal tb_rst      : std_logic                    := '0';
-    signal tb_rx_data  : std_logic_vector(7 downto 0) := (others => '0');
-    signal tb_rx_dv    : std_logic                    := '0';
-    signal tb_ram_addr : std_logic_vector(26 downto 0);
-    signal tb_ram_data : std_logic_vector(15 downto 0);
-    signal tb_ram_lb   : std_logic;
-    signal tb_ram_ub   : std_logic;
-    signal tb_ram_cen  : std_logic;
-    signal tb_ram_wen  : std_logic;
-    signal tb_write    : std_logic;
-    signal tb_data     : std_logic_vector(15 downto 0);
+    signal tb_clk               : std_logic := '0';
+    signal tb_rst               : std_logic := '0';
+    signal tb_tx_data           : std_logic := '1';
+    signal tb_rx_data           : std_logic_vector(7 downto 0);
+    signal tb_rx_dv             : std_logic;
+    signal tb_rx_processed_dv   : std_logic;
+    signal tb_rx_processed_data : std_logic_vector(15 downto 0);
+    signal tb_ram_addr          : std_logic_vector(26 downto 0);
+    signal tb_ram_data          : std_logic_vector(15 downto 0);
+    signal tb_ram_lb            : std_logic;
+    signal tb_ram_ub            : std_logic;
+    signal tb_ram_cen           : std_logic;
+    signal tb_ram_wen           : std_logic;
 
     constant byte_1 : std_logic_vector(7 downto 0) := "01101101";
     constant byte_2 : std_logic_vector(7 downto 0) := "10101111";
@@ -80,21 +93,32 @@ begin
     -- Clock generation @ 100 MHz
     tb_clk <= not tb_clk after 5 ns;
 
+    uart : uart_rx
+        generic map(
+            g_CLKS_PER_BIT => 109       -- = (100 MHz)/(921600 bit/s)
+        )
+        port map(
+            i_Clk       => tb_clk,
+            i_RX_Serial => tb_tx_data,
+            o_RX_DV     => tb_rx_dv,
+            o_RX_Byte   => tb_rx_data
+        );
+
     concat : concatenator_16
         port map(
             i_rst  => tb_rst,
             i_load => tb_rx_dv,
             i_data => tb_rx_data,
-            o_dv   => tb_write,
-            o_data => tb_data
+            o_dv   => tb_rx_processed_dv,
+            o_data => tb_rx_processed_data
         );
 
     DUT : sram_fsm
         port map(
             i_clk      => tb_clk,
             i_rst      => tb_rst,
-            i_data     => tb_data,
-            i_write    => tb_write,
+            i_data     => tb_rx_processed_data,
+            i_write    => tb_rx_processed_dv,
             o_ram_addr => tb_ram_addr,
             o_ram_data => tb_ram_data,
             o_ram_lb   => tb_ram_lb,
@@ -112,57 +136,45 @@ begin
         wait_clk(10);
 
         -- Send first byte
-        for i in 7 downto 0 loop
-            tb_rx_data(i) <= byte_1(i);
-            if i /= 0 then
-                wait for 1.085 us;
-            end if;
+        tb_tx_data <= '0';
+        wait for 1.085 us;
+        for i in 0 to 7 loop
+            tb_tx_data <= byte_1(i);
+            wait for 1.085 us;
         end loop;
-        wait_clk(1);
-        tb_rx_dv <= '1';
-        wait_clk(1);
-        tb_rx_dv <= '0';
+        tb_tx_data <= '1';
         wait for 10.851 us;
 
         -- Send second byte
-        for i in 7 downto 0 loop
-            tb_rx_data(i) <= byte_2(i);
-            if i /= 0 then
-                wait for 1.085 us;
-            end if;
+        tb_tx_data <= '0';
+        wait for 1.085 us;
+        for i in 0 to 7 loop
+            tb_tx_data <= byte_2(i);
+            wait for 1.085 us;
         end loop;
-        wait_clk(1);
-        tb_rx_dv <= '1';
-        wait_clk(1);
-        tb_rx_dv <= '0';
+        tb_tx_data <= '1';
         wait for 10.851 us;
 
         -- Send third byte
-        for i in 7 downto 0 loop
-            tb_rx_data(i) <= byte_3(i);
-            if i /= 0 then
-                wait for 1.085 us;
-            end if;
+        tb_tx_data <= '0';
+        wait for 1.085 us;
+        for i in 0 to 7 loop
+            tb_tx_data <= byte_3(i);
+            wait for 1.085 us;
         end loop;
-        wait_clk(1);
-        tb_rx_dv <= '1';
-        wait_clk(1);
-        tb_rx_dv <= '0';
+        tb_tx_data <= '1';
         wait for 10.851 us;
 
         -- Send fourth byte
-        for i in 7 downto 0 loop
-            tb_rx_data(i) <= byte_4(i);
-            if i /= 0 then
-                wait for 1.085 us;
-            end if;
+        tb_tx_data <= '0';
+        wait for 1.085 us;
+        for i in 0 to 7 loop
+            tb_tx_data <= byte_4(i);
+            wait for 1.085 us;
         end loop;
-        wait_clk(1);
-        tb_rx_dv <= '1';
-        wait_clk(1);
-        tb_rx_dv <= '0';
+        tb_tx_data <= '1';
 
-        wait_clk(10100);
+        wait for 25 us;
         -- Stop simulation
         report "Simulation completed";
         finish;
