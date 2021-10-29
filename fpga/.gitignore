@@ -85,11 +85,6 @@
 !*.bmm
 !*.xmp
 #########
-#Custom files
-#########
-video-card/video-card.ip_user_files/README.txt
-#########
 #Custom folders
 #########
-video-card.cache
-video-card.sim
+video-card/*
