@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_vga_pattern_generator_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="tb_vga_pattern_generator" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="988855000fs"></ZoomStartTime>
+      <ZoomEndTime time="1097355001fs"></ZoomEndTime>
+      <Cursor1Time time="1024255000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="147"></NameColumnWidth>
+      <ValueColumnWidth column_width="58"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="32" />
+   <wave_markers>
+      <marker time="999225000" label="" />
+   </wave_markers>
+   <wvobject fp_name="/tb_vga_pattern_generator/tb_clk" type="logic">
+      <obj_property name="ElementShortName">tb_clk</obj_property>
+      <obj_property name="ObjectShortName">tb_clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/tb_rst" type="logic">
+      <obj_property name="ElementShortName">tb_rst</obj_property>
+      <obj_property name="ObjectShortName">tb_rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/tb_ram_addr" type="array">
+      <obj_property name="ElementShortName">tb_ram_addr[26:0]</obj_property>
+      <obj_property name="ObjectShortName">tb_ram_addr[26:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/tb_ram_data" type="array">
+      <obj_property name="ElementShortName">tb_ram_data[15:0]</obj_property>
+      <obj_property name="ObjectShortName">tb_ram_data[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/tb_ram_lb" type="logic">
+      <obj_property name="ElementShortName">tb_ram_lb</obj_property>
+      <obj_property name="ObjectShortName">tb_ram_lb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/tb_ram_ub" type="logic">
+      <obj_property name="ElementShortName">tb_ram_ub</obj_property>
+      <obj_property name="ObjectShortName">tb_ram_ub</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/tb_ram_cen" type="logic">
+      <obj_property name="ElementShortName">tb_ram_cen</obj_property>
+      <obj_property name="ObjectShortName">tb_ram_cen</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/tb_ram_oen" type="logic">
+      <obj_property name="ElementShortName">tb_ram_oen</obj_property>
+      <obj_property name="ObjectShortName">tb_ram_oen</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/tb_ram_wen" type="logic">
+      <obj_property name="ElementShortName">tb_ram_wen</obj_property>
+      <obj_property name="ObjectShortName">tb_ram_wen</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/tb_horz_count" type="array">
+      <obj_property name="ElementShortName">tb_horz_count[9:0]</obj_property>
+      <obj_property name="ObjectShortName">tb_horz_count[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/tb_vert_count" type="array">
+      <obj_property name="ElementShortName">tb_vert_count[9:0]</obj_property>
+      <obj_property name="ObjectShortName">tb_vert_count[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/tb_red" type="array">
+      <obj_property name="ElementShortName">tb_red[3:0]</obj_property>
+      <obj_property name="ObjectShortName">tb_red[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/tb_green" type="array">
+      <obj_property name="ElementShortName">tb_green[3:0]</obj_property>
+      <obj_property name="ObjectShortName">tb_green[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/tb_blue" type="array">
+      <obj_property name="ElementShortName">tb_blue[3:0]</obj_property>
+      <obj_property name="ObjectShortName">tb_blue[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/pixel_data" type="array">
+      <obj_property name="ElementShortName">pixel_data[15:0]</obj_property>
+      <obj_property name="ObjectShortName">pixel_data[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider16">
+      <obj_property name="label">vga_pattern_generator</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="group62" type="group">
+      <obj_property name="label">inputs</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_vga_pattern_generator/DUT/i_clk" type="logic">
+         <obj_property name="ElementShortName">i_clk</obj_property>
+         <obj_property name="ObjectShortName">i_clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_vga_pattern_generator/DUT/i_rst" type="logic">
+         <obj_property name="ElementShortName">i_rst</obj_property>
+         <obj_property name="ObjectShortName">i_rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_vga_pattern_generator/DUT/i_ram_data_r" type="array">
+         <obj_property name="ElementShortName">i_ram_data_r[15:0]</obj_property>
+         <obj_property name="ObjectShortName">i_ram_data_r[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_vga_pattern_generator/DUT/i_ram_wen" type="logic">
+         <obj_property name="ElementShortName">i_ram_wen</obj_property>
+         <obj_property name="ObjectShortName">i_ram_wen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_vga_pattern_generator/DUT/i_horz_count" type="array">
+         <obj_property name="ElementShortName">i_horz_count[9:0]</obj_property>
+         <obj_property name="ObjectShortName">i_horz_count[9:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_vga_pattern_generator/DUT/i_vert_count" type="array">
+         <obj_property name="ElementShortName">i_vert_count[9:0]</obj_property>
+         <obj_property name="ObjectShortName">i_vert_count[9:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group63" type="group">
+      <obj_property name="label">outputs</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_vga_pattern_generator/DUT/o_ram_addr" type="array">
+         <obj_property name="ElementShortName">o_ram_addr[26:0]</obj_property>
+         <obj_property name="ObjectShortName">o_ram_addr[26:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_vga_pattern_generator/DUT/o_ram_cen" type="logic">
+         <obj_property name="ElementShortName">o_ram_cen</obj_property>
+         <obj_property name="ObjectShortName">o_ram_cen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_vga_pattern_generator/DUT/o_ram_oen" type="logic">
+         <obj_property name="ElementShortName">o_ram_oen</obj_property>
+         <obj_property name="ObjectShortName">o_ram_oen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_vga_pattern_generator/DUT/o_ram_ub" type="logic">
+         <obj_property name="ElementShortName">o_ram_ub</obj_property>
+         <obj_property name="ObjectShortName">o_ram_ub</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_vga_pattern_generator/DUT/o_ram_lb" type="logic">
+         <obj_property name="ElementShortName">o_ram_lb</obj_property>
+         <obj_property name="ObjectShortName">o_ram_lb</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_vga_pattern_generator/DUT/o_red" type="array">
+         <obj_property name="ElementShortName">o_red[3:0]</obj_property>
+         <obj_property name="ObjectShortName">o_red[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_vga_pattern_generator/DUT/o_green" type="array">
+         <obj_property name="ElementShortName">o_green[3:0]</obj_property>
+         <obj_property name="ObjectShortName">o_green[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_vga_pattern_generator/DUT/o_blue" type="array">
+         <obj_property name="ElementShortName">o_blue[3:0]</obj_property>
+         <obj_property name="ObjectShortName">o_blue[3:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/DUT/w_h_count" type="array">
+      <obj_property name="ElementShortName">w_h_count[9:0]</obj_property>
+      <obj_property name="ObjectShortName">w_h_count[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/DUT/w_v_count" type="array">
+      <obj_property name="ElementShortName">w_v_count[9:0]</obj_property>
+      <obj_property name="ObjectShortName">w_v_count[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/DUT/r_display" type="logic">
+      <obj_property name="ElementShortName">r_display</obj_property>
+      <obj_property name="ObjectShortName">r_display</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/DUT/r_data_read" type="logic">
+      <obj_property name="ElementShortName">r_data_read</obj_property>
+      <obj_property name="ObjectShortName">r_data_read</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/DUT/r_ram_read_addr" type="array">
+      <obj_property name="ElementShortName">r_ram_read_addr[26:0]</obj_property>
+      <obj_property name="ObjectShortName">r_ram_read_addr[26:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/DUT/r_reading" type="logic">
+      <obj_property name="ElementShortName">r_reading</obj_property>
+      <obj_property name="ObjectShortName">r_reading</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/DUT/w_read_done" type="logic">
+      <obj_property name="ElementShortName">w_read_done</obj_property>
+      <obj_property name="ObjectShortName">w_read_done</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/DUT/r_red_value" type="array">
+      <obj_property name="ElementShortName">r_red_value[3:0]</obj_property>
+      <obj_property name="ObjectShortName">r_red_value[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/DUT/r_green_value" type="array">
+      <obj_property name="ElementShortName">r_green_value[3:0]</obj_property>
+      <obj_property name="ObjectShortName">r_green_value[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/DUT/r_blue_value" type="array">
+      <obj_property name="ElementShortName">r_blue_value[3:0]</obj_property>
+      <obj_property name="ObjectShortName">r_blue_value[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/DUT/x_pixel_start" type="other">
+      <obj_property name="ElementShortName">x_pixel_start</obj_property>
+      <obj_property name="ObjectShortName">x_pixel_start</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/DUT/x_pixel_end" type="other">
+      <obj_property name="ElementShortName">x_pixel_end</obj_property>
+      <obj_property name="ObjectShortName">x_pixel_end</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/DUT/y_pixel_start" type="other">
+      <obj_property name="ElementShortName">y_pixel_start</obj_property>
+      <obj_property name="ObjectShortName">y_pixel_start</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_vga_pattern_generator/DUT/y_pixel_end" type="other">
+      <obj_property name="ElementShortName">y_pixel_end</obj_property>
+      <obj_property name="ObjectShortName">y_pixel_end</obj_property>
+   </wvobject>
+</wave_config>

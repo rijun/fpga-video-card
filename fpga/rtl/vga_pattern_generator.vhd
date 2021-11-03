@@ -84,35 +84,31 @@ begin
             r_reading       <= '0';
         elsif rising_edge(i_clk) then
             -- Load from RAM only when in display range, with 1 count prefetch
-            r_display <= '0';
+            --r_display <= '0';
             if w_v_count >= y_pixel_start and w_v_count <= y_pixel_end then
                 if w_h_count >= x_pixel_start - 1 and w_h_count <= x_pixel_end - 1 then
-                    r_display <= '1';
+                    --r_display <= '1';
                     -- Skip reading if all data was already read
-                    if r_data_read = '0' then
-                        -- Check if red, green and blue pixel values were not read yet
-                        if r_data_read = '0' then
-                            -- Reading has finished
-                            if w_read_done = '1' then
-                                o_ram_addr      <= (others => 'Z');
-                                o_ram_cen       <= 'Z';
-                                o_ram_oen       <= 'Z';
-                                o_ram_ub        <= 'Z';
-                                o_ram_lb        <= 'Z';
-                                r_ram_read_addr <= r_ram_read_addr + 3;
-                                r_data_read     <= '1';
-                                r_reading       <= '0';
-                                r_red_value     <= i_ram_data_r(3 downto 0);
-                                r_green_value   <= i_ram_data_r(7 downto 4);
-                                r_blue_value    <= i_ram_data_r(11 downto 8);
-                            else
-                                o_ram_addr <= std_logic_vector(r_ram_read_addr);
-                                o_ram_cen  <= '0';
-                                o_ram_oen  <= '0';
-                                o_ram_ub   <= '0';
-                                o_ram_lb   <= '0';
-                                r_reading  <= '1';
-                            end if;
+                    if r_display = '0' then
+                        -- Reading has finished
+                        if w_read_done = '1' then
+                            o_ram_addr      <= (others => 'Z');
+                            o_ram_cen       <= 'Z';
+                            o_ram_oen       <= 'Z';
+                            o_ram_ub        <= 'Z';
+                            o_ram_lb        <= 'Z';
+                            r_ram_read_addr <= r_ram_read_addr + 3;
+                            r_data_read     <= '1';
+                            r_red_value     <= i_ram_data_r(3 downto 0);
+                            r_green_value   <= i_ram_data_r(7 downto 4);
+                            r_blue_value    <= i_ram_data_r(11 downto 8);
+                        else
+                            o_ram_addr <= std_logic_vector(r_ram_read_addr);
+                            o_ram_cen  <= '0';
+                            o_ram_oen  <= '0';
+                            o_ram_ub   <= '0';
+                            o_ram_lb   <= '0';
+                            r_reading  <= '1';
                         end if;
                     end if;
                 end if;
@@ -122,6 +118,17 @@ begin
             end if;
         end if;
     end process read_pixel_value;
+    
+    data_read_ff : process(i_clk)
+    begin
+        if rising_edge(i_clk) then
+            if w_read_done = '1' then
+                r_display <= '1';
+            elsif w_read_done = '0' then
+                r_display <= '0';
+            end if;
+        end if;
+    end process data_read_ff;
 
     read_counter : entity work.counter_up
         generic map(

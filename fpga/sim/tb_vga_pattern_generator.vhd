@@ -35,7 +35,7 @@ architecture Behavioral of tb_vga_pattern_generator is
     signal tb_ram_ub     : std_logic;
     signal tb_ram_cen    : std_logic;
     signal tb_ram_oen    : std_logic;
-    signal tb_ram_wen    : std_logic;
+    signal tb_ram_wen    : std_logic := '1';
     signal tb_horz_count : unsigned(9 downto 0);
     signal tb_vert_count : unsigned(9 downto 0);
     signal tb_red        : std_logic_vector(3 downto 0);
@@ -43,9 +43,6 @@ architecture Behavioral of tb_vga_pattern_generator is
     signal tb_blue       : std_logic_vector(3 downto 0);
 
     constant pixel_data : std_logic_vector(15 downto 0) := x"dead";
-    constant byte_2     : std_logic_vector(7 downto 0)  := "10101111";
-    constant byte_3     : std_logic_vector(7 downto 0)  := "10111100";
-    constant byte_4     : std_logic_vector(7 downto 0)  := "11011011";
 
     procedure wait_clk(constant cycle : in integer) is
     begin
